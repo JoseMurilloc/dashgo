@@ -6,6 +6,7 @@ import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import React from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from '../../components/Header';
+import { Pagination } from "../../components/Pagination";
 import { SideBar } from '../../components/SideBar';
 
 export default function UserList() {
@@ -30,6 +31,7 @@ export default function UserList() {
               as="a"
               size="sm"
               colorScheme="pink"
+              cursor="pointer"
               leftIcon={<Icon as={RiAddLine} />}
             >
               Criar novo usuário
@@ -69,6 +71,61 @@ export default function UserList() {
                     size="sm"
                     colorScheme="purple"
                     leftIcon={<Icon as={RiPencilLine} />}
+                    cursor="pointer"
+                  >
+                    Editar
+              </Button>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td px="6">
+                  <Checkbox colorScheme="pink"/>
+                </Td>
+                <Td>
+                  <Box>
+                    <Text fontWeight="bold">José Murillo</Text>
+                    <Text fontSize="sm" color="gray.300">
+                      jooseemurillo@gmail.com
+                    </Text>
+                  </Box>
+                </Td>
+                <Td>
+                  04 de Abril de 2021
+                </Td>
+                <Td>
+                  <Button
+                    as="a"
+                    size="sm"
+                    colorScheme="purple"
+                    leftIcon={<Icon as={RiPencilLine} />}
+                    cursor="pointer"
+                  >
+                    Editar
+              </Button>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td px="6">
+                  <Checkbox colorScheme="pink"/>
+                </Td>
+                <Td>
+                  <Box>
+                    <Text fontWeight="bold">José Murillo</Text>
+                    <Text fontSize="sm" color="gray.300">
+                      jooseemurillo@gmail.com
+                    </Text>
+                  </Box>
+                </Td>
+                <Td>
+                  04 de Abril de 2021
+                </Td>
+                <Td>
+                  <Button
+                    as="a"
+                    size="sm"
+                    colorScheme="purple"
+                    leftIcon={<Icon as={RiPencilLine} />}
+                    cursor="pointer"
                   >
                     Editar
               </Button>
@@ -76,6 +133,8 @@ export default function UserList() {
               </Tr>
             </Tbody>
           </Table>
+
+          <Pagination />
         </Box>
       </Flex>
     </Box>
