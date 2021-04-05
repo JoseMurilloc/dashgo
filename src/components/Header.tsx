@@ -22,7 +22,6 @@ export function Header() {
       maxWidth={1480}
       h="20"
       mt="4"
-      px="6"
       align="center"
     >
       <Text
@@ -72,7 +71,7 @@ export function Header() {
           <Icon as={RiUserAddLine} fontSize="20" />
         </HStack>
       
-        <Flex align="center">
+        <Flex align="center" ml="4">
           <Box mr="4" textAlign="right">
             <Text>José Murillo</Text>
             <Text color="gray.300" fontSize="small">
