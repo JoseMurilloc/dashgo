@@ -59,12 +59,21 @@ const series = [
 
 export default function Dashboard() {
   return (
-    <Flex direction="column" h="100vh">
+    <Flex direction="column" h="100vh" pl={120} pr={120} >
       <Header />
 
-      <Flex width="100vh" my="6" maxWidth={1480} mx="auto" px="6">
+      <Flex
+        flex="1"
+        my="6"
+        maxWidth={1480}
+      >
         <SideBar />
-        <SimpleGrid flex="1" gap="4" minWidth="320px" align="flex-start">
+        <SimpleGrid
+          flex="1"
+          gap="4"
+          maxWidth="320px"
+          align="flex-start"
+        >
           <Box
             p="8"
             bg="gray.800"
@@ -81,6 +90,8 @@ export default function Dashboard() {
             borderRadius={8}
           >
             <Text fontSize="lg" mb="4">Taxa de abertura</Text>
+            <Chart options={options} series={series} type="area" height={160} />
+
           </Box>
 
         </SimpleGrid>
