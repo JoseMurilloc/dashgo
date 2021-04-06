@@ -3,7 +3,7 @@ import { Box, Divider, Flex, Heading, HStack, SimpleGrid, Text, VStack } from "@
 import React from "react";
 import { Header } from '../../components/Header';
 import { Input } from "../../components/Input";
-import { SideBar } from '../../components/SideBar';
+import { SideBar } from '../../components/Sidebar';
 
 export default function CreateUser() {
   return (
