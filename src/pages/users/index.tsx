@@ -2,6 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
 import Icon from "@chakra-ui/icon";
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
+import { useBreakpointValue } from "@chakra-ui/media-query";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import React from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
@@ -10,6 +11,11 @@ import { Pagination } from "../../components/Pagination";
 import { SideBar } from '../../components/Sidebar';
 
 export default function UserList() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true
+  })
+
   return (
     <Box pl={120} pr={120}>
       <Header />
@@ -34,7 +40,7 @@ export default function UserList() {
               cursor="pointer"
               leftIcon={<Icon as={RiAddLine} />}
             >
-              Criar novo usuário
+              Criar novo
             </Button>
           </Flex>
         
@@ -45,13 +51,13 @@ export default function UserList() {
                   <Checkbox colorScheme="pink"/>
                 </Th>
                 <Th>Usuários</Th>
-                <Th>Data de cadastro</Th>
-                <Th>Ações</Th>
+                { isWideVersion && <Th>Data de cadastro</Th>}
+                { isWideVersion && <Th>Ações</Th>}
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td px="6">
+            <Tr px={["4", "4", "6"]}>
+                <Td>
                   <Checkbox colorScheme="pink"/>
                 </Td>
                 <Td>
@@ -62,75 +68,26 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>
-                  04 de Abril de 2021
-                </Td>
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} />}
-                    cursor="pointer"
-                  >
-                    Editar
-              </Button>
-                </Td>
+                {isWideVersion && (
+                  <Td>
+                    04 de Abril de 2021
+                  </Td>
+                )}
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} />}
+                      cursor="pointer"
+                    >
+                      Editar
+                    </Button>
+                  </Td>  
+                )}
               </Tr>
-              <Tr>
-                <Td px="6">
-                  <Checkbox colorScheme="pink"/>
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">José Murillo</Text>
-                    <Text fontSize="sm" color="gray.300">
-                      jooseemurillo@gmail.com
-                    </Text>
-                  </Box>
-                </Td>
-                <Td>
-                  04 de Abril de 2021
-                </Td>
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} />}
-                    cursor="pointer"
-                  >
-                    Editar
-              </Button>
-                </Td>
-              </Tr>
-              <Tr>
-                <Td px="6">
-                  <Checkbox colorScheme="pink"/>
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">José Murillo</Text>
-                    <Text fontSize="sm" color="gray.300">
-                      jooseemurillo@gmail.com
-                    </Text>
-                  </Box>
-                </Td>
-                <Td>
-                  04 de Abril de 2021
-                </Td>
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} />}
-                    cursor="pointer"
-                  >
-                    Editar
-              </Button>
-                </Td>
-              </Tr>
+               
             </Tbody>
           </Table>
 

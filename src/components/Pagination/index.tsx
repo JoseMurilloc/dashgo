@@ -1,11 +1,17 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Stack } from "@chakra-ui/layout";
+import { useBreakpointValue } from "@chakra-ui/media-query";
 import { PaginationItem } from "./PaginationItem";
 
 export function Pagination() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true
+  })
+
   return (
     <Stack
-      direction="row"
+      direction={isWideVersion ? 'row' : 'column'}
       mt="8"
       justify="space-between"
       align="center"
