@@ -1,10 +1,10 @@
+import React from "react";
 import { Button } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
 import Icon from "@chakra-ui/icon";
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
-import React from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from '../../components/Header';
 import { Pagination } from "../../components/Pagination";
@@ -18,9 +18,20 @@ export default function UserList() {
     const response = await fetch(`http://localhost:3000/api/users`)
     const data = await response.json()
 
-    return data
-  })
 
+    const users = data.users.map(user => ({
+      ...user,
+      createAt: new Date(user.createAt).toLocaleDateString('pt-br', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      })
+    }))
+
+    return users
+  }, {
+    staleTime: 1000 * 5, // 5 seconds
+  })
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -58,7 +69,9 @@ export default function UserList() {
           </Flex>
         
           {isLoading ? (
-            <Spinner />
+            <Flex justify="center">
+              <Spinner />
+            </Flex>
           ) : error ? (
             <Text>Error ao carregar os dados do usúario</Text>
           ) : (
@@ -75,37 +88,37 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                <Tr px={["4", "4", "6"]}>
-                    <Td>
-                      <Checkbox colorScheme="pink"/>
-                    </Td>
-                    <Td>
-                      <Box>
-                        <Text fontWeight="bold">José Murillo</Text>
-                        <Text fontSize="sm" color="gray.300">
-                          jooseemurillo@gmail.com
-                        </Text>
-                      </Box>
-                    </Td>
-                    {isWideVersion && (
+                  {data.map(user => (
+                    <Tr key={user.id} px={["4", "4", "6"]}>
                       <Td>
-                        04 de Abril de 2021
+                        <Checkbox colorScheme="pink"/>
                       </Td>
-                    )}
-                    {isWideVersion && (
                       <Td>
-                        <Button
-                          as="a"
-                          size="sm"
-                          colorScheme="purple"
-                          leftIcon={<Icon as={RiPencilLine} />}
-                          cursor="pointer"
-                        >
-                          Editar
-                        </Button>
-                      </Td>  
-                    )}
-                  </Tr>
+                        <Box>
+                          <Text fontWeight="bold">{user.name}</Text>
+                          <Text fontSize="sm" color="gray.300">
+                            {user.email}
+                          </Text>
+                        </Box>
+                      </Td>
+                      {isWideVersion && (
+                        <Td>{user.createAt}</Td>
+                      )}
+                      {isWideVersion && (
+                        <Td>
+                          <Button
+                            as="a"
+                            size="sm"
+                            colorScheme="purple"
+                            leftIcon={<Icon as={RiPencilLine} />}
+                            cursor="pointer"
+                          >
+                            Editar
+                          </Button>
+                        </Td>  
+                      )}
+                    </Tr>
+                  ))}
                   
                 </Tbody>
               </Table>
