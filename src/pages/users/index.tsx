@@ -10,27 +10,11 @@ import { Header } from '../../components/Header';
 import { Pagination } from "../../components/Pagination";
 import { SideBar } from '../../components/Sidebar';
 import Link from 'next/link';
-import { useQuery } from "react-query";
 import { Spinner } from "@chakra-ui/spinner";
-import { api } from "../../services";
+import { useUser } from "../../services/hooks/useUser";
 
 export default function UserList() {
-  const { data, isLoading, error, isFetching } = useQuery('users', async () => {
-    const {data} = await api(`/users`)
-
-    const users = data.users.map(user => ({
-      ...user,
-      createAt: new Date(user.createAt).toLocaleDateString('pt-br', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      })
-    }))
-
-    return users
-  }, {
-    staleTime: 1000 * 5, // 5 seconds
-  })
+  const { data, isLoading, error, isFetching } = useUser()
 
   const isWideVersion = useBreakpointValue({
     base: false,
